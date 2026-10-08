@@ -15,6 +15,10 @@ jobs:
             mirror: coin-or/cuOPT
             upstream_default: main
             mirror_default: main
+          - upstream: Pyomo/pyomo
+            mirror: coin-or/pyomo
+            upstream_default: main
+            mirror_default: main
       fail-fast: false
 
     steps:
