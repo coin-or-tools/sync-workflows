@@ -51,7 +51,23 @@ jobs:
             git checkout -B $local_branch $branch
             git push https://x-access-token:${{ secrets.SYNC_TOKEN }}@github.com/${{ matrix.mirror }} $local_branch --force
           done
-
+          
+      - name: Delete branches not in upstream
+        run: |
+          # Get list of upstream branches
+          upstream_branches=$(git branch -r | grep upstream/ | grep -v HEAD | sed 's|upstream/||' | tr -d ' ')
+          
+          # Get list of origin branches
+          origin_branches=$(git branch -r | grep origin/ | grep -v HEAD | sed 's|origin/||' | tr -d ' ')
+          
+          # Delete any origin branches not in upstream
+          for branch in $origin_branches; do
+            if ! echo "$upstream_branches" | grep -qx "$branch"; then
+              echo "Deleting branch $branch from mirror (not in upstream)"
+              git push https://x-access-token:${{ secrets.SYNC_TOKEN }}@github.com/${{ matrix.mirror }} --delete $branch || true
+            fi
+          done
+          
       - name: Sync tags
         run: |
           git push https://x-access-token:${{ secrets.SYNC_TOKEN }}@github.com/${{ matrix.mirror }} --tags --force
