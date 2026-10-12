@@ -19,6 +19,10 @@ jobs:
             mirror: coin-or/pyomo
             upstream_default: main
             mirror_default: main
+          - upstream: ERGO-Code/HiGHS
+            mirror: coin-or/HiGHS
+            upstream_default: master
+            mirror_default: master
       fail-fast: false
 
     steps:
