@@ -23,6 +23,10 @@ jobs:
             mirror: coin-or/HiGHS
             upstream_default: master
             mirror_default: master
+          - upstream: cafzal/frontier
+            mirror: coin-or/frontier
+            upstream_default: main
+            mirror_default: main
       fail-fast: false
 
     steps:
