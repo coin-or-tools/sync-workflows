@@ -27,6 +27,10 @@ jobs:
             mirror: coin-or/frontier
             upstream_default: main
             mirror_default: main
+          - upstream: Pyomo/mpi-sppy
+            mirror: coin-or/mpi-sppy
+            upstream_default: main
+            mirror_default: main
       fail-fast: false
 
     steps:
